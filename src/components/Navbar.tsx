@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, X, Users, Search, Plus } from 'lucide-react';
+import { Heart, Menu, X, Users, Search, Plus, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +32,20 @@ const Navbar = () => {
               <Plus className="w-4 h-4" />
               Emergency Request
             </Button>
+            <div className="flex items-center gap-3 ml-4 pl-4 border-l border-border">
+              <Link to="/donor-login">
+                <Button variant="outline" size="sm" className="border-primary/20 text-primary hover:bg-primary/10">
+                  <Heart className="mr-2 h-4 w-4" />
+                  Donor Login
+                </Button>
+              </Link>
+              <Link to="/admin-login">
+                <Button variant="medical" size="sm">
+                  <Shield className="mr-2 h-4 w-4" />
+                  Admin Login
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -61,6 +76,20 @@ const Navbar = () => {
                 <Plus className="w-4 h-4" />
                 Emergency Request
               </Button>
+              <div className="border-t border-border pt-2 mt-2">
+                <Link to="/donor-login" className="block">
+                  <Button variant="outline" className="w-full justify-start gap-2 border-primary/20 text-primary hover:bg-primary/10">
+                    <Heart className="w-4 h-4" />
+                    Donor Login
+                  </Button>
+                </Link>
+                <Link to="/admin-login" className="block mt-2">
+                  <Button variant="medical" className="w-full justify-start gap-2">
+                    <Shield className="w-4 h-4" />
+                    Admin Login
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         )}
