@@ -3,12 +3,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Shield, ArrowLeft } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import { Shield, ArrowLeft, Building2, Phone, Mail, MapPin, Clock, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [organizationType, setOrganizationType] = useState('');
+  const [organizationId, setOrganizationId] = useState('');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-secondary/5 flex items-center justify-center p-4">
@@ -34,7 +38,8 @@ const AdminLogin = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="admin-email" className="text-sm font-medium">
+              <Label htmlFor="admin-email" className="text-sm font-medium flex items-center gap-2">
+                <Mail className="h-4 w-4 text-primary" />
                 Admin Email
               </Label>
               <Input
@@ -48,7 +53,8 @@ const AdminLogin = () => {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="admin-password" className="text-sm font-medium">
+              <Label htmlFor="admin-password" className="text-sm font-medium flex items-center gap-2">
+                <Shield className="h-4 w-4 text-primary" />
                 Password
               </Label>
               <Input
@@ -62,19 +68,56 @@ const AdminLogin = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="organization" className="text-sm font-medium">
+              <Label htmlFor="organization-type" className="text-sm font-medium flex items-center gap-2">
+                <Building2 className="h-4 w-4 text-primary" />
                 Organization Type
               </Label>
-              <select 
-                id="organization"
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <option value="">Select organization type</option>
-                <option value="hospital">Hospital</option>
-                <option value="blood-bank">Blood Bank</option>
-                <option value="ngo">NGO</option>
-                <option value="clinic">Medical Clinic</option>
-              </select>
+              <Select value={organizationType} onValueChange={setOrganizationType}>
+                <SelectTrigger className="border-primary/20 focus:border-primary">
+                  <SelectValue placeholder="Select organization type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="hospital">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4" />
+                      Hospital
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="blood-bank">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4" />
+                      Blood Bank
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="ngo">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4" />
+                      NGO
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="medical-college">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4" />
+                      Medical College
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="organization-id" className="text-sm font-medium flex items-center gap-2">
+                <Shield className="h-4 w-4 text-primary" />
+                Organization ID / License No.
+              </Label>
+              <Input
+                id="organization-id"
+                type="text"
+                placeholder="Enter registration/license number"
+                value={organizationId}
+                onChange={(e) => setOrganizationId(e.target.value)}
+                className="border-primary/20 focus:border-primary"
+              />
             </div>
 
             <div className="flex items-center justify-between text-sm">
@@ -110,11 +153,43 @@ const AdminLogin = () => {
           </CardContent>
         </Card>
 
-        <div className="mt-6 p-4 bg-muted/50 rounded-lg border border-border">
-          <p className="text-xs text-muted-foreground text-center">
-            <Shield className="inline h-3 w-3 mr-1" />
-            Secure admin portal for hospitals, blood banks, and NGOs
-          </p>
+        <div className="mt-6 space-y-4">
+          <div className="p-4 bg-muted/50 rounded-lg border border-border">
+            <div className="flex items-center gap-2 mb-2">
+              <CheckCircle className="h-4 w-4 text-green-600" />
+              <p className="text-sm font-medium text-foreground">Verification Requirements</p>
+            </div>
+            <ul className="text-xs text-muted-foreground space-y-1">
+              <li>• Valid organization registration/license required</li>
+              <li>• All registrations verified before dashboard access</li>
+              <li>• Only verified organizations can manage donor requests</li>
+            </ul>
+          </div>
+          
+          <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+            <div className="flex items-center gap-2 mb-2">
+              <Clock className="h-4 w-4 text-primary" />
+              <p className="text-sm font-medium text-primary">Quick Access Features</p>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <Building2 className="h-3 w-3" />
+                <span>Organization Dashboard</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3 w-3" />
+                <span>Donor Location Maps</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Phone className="h-3 w-3" />
+                <span>Emergency Requests</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                <span>Secure Data Access</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
