@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import DonorLogin from "./pages/DonorLogin";
 import AdminLogin from "./pages/AdminLogin";
 import DonorRegister from "./pages/DonorRegister";
+import OrganizationRegister from "./pages/OrganizationRegister";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/donor-login" element={<DonorLogin />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/donor-register" element={<DonorRegister />} />
+          <Route path="/organization-register" element={<OrganizationRegister />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
